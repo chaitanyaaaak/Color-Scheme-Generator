@@ -5,11 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Scheme Generator</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <header class="header">
+        <div class="controls-container">
+            <input type="color" id="seed-color-input class="color-picker" value="#FF0000">
+            <select id="mode-selector" class="mode-selector">
+                <option value="monochrome">Monochrome</option>
+                <option value="monochrome-dark">Monochrome-dark</option>
+                <option value="monochrome-light">Monochrome-light</option>
+                <option value="analogic">Analogic</option>
+                <option value="complement">Complement</option>
+                <option value="analogic-complement">Analogic-complement</option>
+                <option value="triad">Triad</option>
+                <option value="quad">Quad</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <button class="action-btn" id="get-scheme-btn">Get Scheme
+            </button>
+            <button class="action-btn" id="random-btn">Random Color
+            </button>
+        </div>
+    </header>
+
 
 
 
