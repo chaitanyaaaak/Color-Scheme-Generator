@@ -106,6 +106,53 @@ header {
     outline: none;
 }
 
+/* main content*/
+.color-palette {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.color-column {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.color-column:hover {
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.color-swatch {
+    flex-grow: 1;
+    min-height: 10vh;
+}
+
+.color-info {
+    background-color: var(--header-bg);
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.color-info-extra {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    margin-top: 4px;
+}
+
+.hex-code {
+    text-trasnform: uppercase;
+}
+
+
+
 
 
 
