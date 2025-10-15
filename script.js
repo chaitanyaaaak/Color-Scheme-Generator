@@ -41,10 +41,10 @@ function renderColorScheme(colors) {
 
         return `
             <div class="color-column" data-hex="${hex}">
-                <div class="color=swatch" style="background-color: ${hex};"></div>
+                <div class="color-swatch" style="background-color: ${hex};"></div>
                 <div class="color-info">
                     <p class="hex-code">${hex}</p>
-                    <div>
+                    <div class="color-info-extra">
                         <p>${rgb}</p>
                         <p>${hsl}</p>
                     </div>
@@ -55,7 +55,15 @@ function renderColorScheme(colors) {
     colorPalette.innerHTML = colorColumns;
 }
 
+function handleRandomColor() {
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    
+    colorInput.value = `#${randomColor}`;
+    fetchAndRenderColorScheme();sgit 
+}
 
+getSchemeBtn.addEventListener('click', fetchAndRenderColorScheme);
+randomBtn.addEventListener('click', handleRandomColor);
 
 
 
