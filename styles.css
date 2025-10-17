@@ -9,10 +9,6 @@
     --font-family: 'Sniglet', cursive;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
     font-family: var(--font-family);
@@ -21,9 +17,11 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
-header {
+/* header style */
+.header {
     background-color: var(--header-bg);
     display: flex;
     flex-direction: column;
@@ -156,7 +154,6 @@ button, input, select {
 }
 
 /* loader and status message  */
-
 .status-container {
     display: flex;
     flex-grow: 1;
@@ -186,6 +183,7 @@ button, input, select {
     }
 }
 
+/* copy notification */
 .copy {
     position: fixed;
     bottom: 30px;
@@ -209,6 +207,7 @@ button, input, select {
     visibility: visible;
 }
 
+/* query for larger screens */ 
 @media (min-width: 600px) {
     .header {
         flex-direction: row;
