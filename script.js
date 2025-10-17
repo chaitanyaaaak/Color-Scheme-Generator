@@ -13,8 +13,7 @@ async function fetchAndRenderColorScheme() {
     const mode = modeSelector.value;
     const count = 5;
 
-    // showLoadingState();
-    // updateUrl(seedColor, mode);
+    showLoadingState();
 
     try {
         const response = await fetch(`${API_URL}?hex=${seedColor}&mode=${mode}&count=${count}`);
@@ -22,12 +21,12 @@ async function fetchAndRenderColorScheme() {
             throw new Error(`Network error: ${response.status} - ${response.statusText}`);
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         renderColorScheme(data.colors);
 
     }   catch (error) {
         console.error("Failed to fetch color scheme:", error);
-        // renderErrorState(error.message);
+        renderErrorState(error.message);
     }
 };
 fetchAndRenderColorScheme();
@@ -59,12 +58,50 @@ function handleRandomColor() {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
     
     colorInput.value = `#${randomColor}`;
-    fetchAndRenderColorScheme();sgit 
+    fetchAndRenderColorScheme();
 }
 
 getSchemeBtn.addEventListener('click', fetchAndRenderColorScheme);
 randomBtn.addEventListener('click', handleRandomColor);
 
+function showLoadingState() {
+    colorPalette.innerHTML = `
+        <div class="status-container">
+            <div class="loader"></div>
+        </div>`;
+}
 
+function renderErrorState(message) {
+    colorPalette.innerHTML = `
+        <div class="status-container">
+            <p>Sorry, something went wrong. <br> 
+            Please try again. <br>
+            <small>(${message})</small>
+            </p>
+        </div>`;
+}
+
+function handlePaletteClick(e) {
+    const colorColumn = e.target.closest('.color-column');
+    if (!colorColumn) return;
+
+    const hexCode = colorColumn.dataset.hex;
+    navigator.clipboard.writeText(hexCode)
+        .then(() => showCopyNotification(`Copied ${hexCode}`))
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+            showCopyNotification('Could not copy color');
+        });    
+}
+
+function showCopyNotification(message) {
+    if (copyTimeout) clearTimeout(copyTimeout);
+    copyNotification.textContent = message;
+    copyNotification.classList.add('show');
+    copyTimeout = setTimeout(() => copyNotification.classList.remove('show'), 2000);
+}
+
+
+colorPalette.addEventListener('click', handlePaletteClick);
 
 
