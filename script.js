@@ -8,6 +8,10 @@ const copyNotification = document.getElementById('copy-notification');
 const API_URL = 'https://www.thecolorapi.com/scheme';
 let copyTimeout;
 
+getSchemeBtn.addEventListener('click', fetchAndRenderColorScheme);
+randomBtn.addEventListener('click', handleRandomColor);
+colorPalette.addEventListener('click', handlePaletteClick);
+
 async function fetchAndRenderColorScheme() {
     const seedColor = colorInput.value.substring(1);
     const mode = modeSelector.value;
@@ -29,7 +33,6 @@ async function fetchAndRenderColorScheme() {
         renderErrorState(error.message);
     }
 };
-fetchAndRenderColorScheme();
 
 function renderColorScheme(colors) {
 
@@ -54,23 +57,13 @@ function renderColorScheme(colors) {
     colorPalette.innerHTML = colorColumns;
 }
 
-function handleRandomColor() {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-    
-    colorInput.value = `#${randomColor}`;
-    fetchAndRenderColorScheme();
-}
-
-getSchemeBtn.addEventListener('click', fetchAndRenderColorScheme);
-randomBtn.addEventListener('click', handleRandomColor);
-
 function showLoadingState() {
     colorPalette.innerHTML = `
         <div class="status-container">
             <div class="loader"></div>
         </div>`;
-}
-
+    }
+    
 function renderErrorState(message) {
     colorPalette.innerHTML = `
         <div class="status-container">
@@ -79,19 +72,25 @@ function renderErrorState(message) {
             <small>(${message})</small>
             </p>
         </div>`;
+    }
+
+function handleRandomColor() {
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    colorInput.value = `#${randomColor}`;
+    fetchAndRenderColorScheme();
 }
 
 function handlePaletteClick(e) {
     const colorColumn = e.target.closest('.color-column');
     if (!colorColumn) return;
-
+    
     const hexCode = colorColumn.dataset.hex;
     navigator.clipboard.writeText(hexCode)
-        .then(() => showCopyNotification(`Copied ${hexCode}`))
-        .catch(err => {
-            console.error('Failed to copy text: ', err);
-            showCopyNotification('Could not copy color');
-        });    
+    .then(() => showCopyNotification(`Copied ${hexCode}`))
+    .catch(err => {
+        console.error('Failed to copy text: ', err);
+        showCopyNotification('Could not copy color');
+    });    
 }
 
 function showCopyNotification(message) {
@@ -101,7 +100,6 @@ function showCopyNotification(message) {
     copyTimeout = setTimeout(() => copyNotification.classList.remove('show'), 2000);
 }
 
-
-colorPalette.addEventListener('click', handlePaletteClick);
+document.addEventListener('DOMContentLoaded', fetchAndRenderColorScheme);
 
 
