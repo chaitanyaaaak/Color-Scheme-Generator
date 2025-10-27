@@ -2,7 +2,7 @@
 
 A responsive and easy-to-use color scheme generator built with vanilla JavaScript. This tool allows you to select a seed color and a generation mode to instantly create a beautiful 5-color palette. It's a perfect tool for designers and developers looking for quick color inspiration.
 
-### 🎨 [Live Working Demo](https://colorschemegeneratorbyck.netlify.app/) 
+### 🎨 Live Working Demo: [Color Scheme Generator](https://colorschemegeneratorbyck.netlify.app/) 
 
 ---
 
